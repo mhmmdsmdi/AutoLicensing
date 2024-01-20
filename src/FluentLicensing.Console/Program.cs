@@ -3,14 +3,12 @@
 using System.Security.Cryptography;
 using System.Text;
 
-var aaa = RSA.Create(2048);
-
 var rsa = new RSACryptoServiceProvider(2048);
 var privateKey = rsa.ToXmlString(true);
 var publicKey = rsa.ToXmlString(false);
 
-Console.WriteLine("Private Key: " + Convert.ToBase64String(Encoding.UTF8.GetBytes(privateKey)) + Environment.NewLine);
-Console.WriteLine("Public Key: " + Convert.ToBase64String(Encoding.UTF8.GetBytes(publicKey)) + Environment.NewLine);
+Console.WriteLine("Private EncryptKey: " + Convert.ToBase64String(Encoding.UTF8.GetBytes(privateKey)) + Environment.NewLine);
+Console.WriteLine("Public EncryptKey: " + Convert.ToBase64String(Encoding.UTF8.GetBytes(publicKey)) + Environment.NewLine);
 
 var text = "Stringa da Criptare@#[]123123";
 Console.WriteLine("Text to encrypt: " + Environment.NewLine + text + Environment.NewLine);
