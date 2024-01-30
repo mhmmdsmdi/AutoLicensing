@@ -1,20 +1,10 @@
-﻿namespace FluentLicensing;
+﻿using FluentLicensing.Builder;
+using FluentLicensing.Verifier;
 
-public class License(string key)
+namespace FluentLicensing;
+
+public static class License
 {
-    /// <summary>
-    /// Base64 license key
-    /// </summary>
-    public string Key { get; } = key;
-
-    public License(byte[] bytes) : this(Convert.ToBase64String(bytes))
-    {
-    }
-
-    /// <summary>
-    /// From base64 to bytes
-    /// </summary>
-    /// <returns></returns>
-    public byte[] ToBytes()
-        => Convert.FromBase64String(Key);
+    public static IGeneratorSigner Generator => new LicenseGenerator();
+    public static IVerifierSignerBuilder Verifier => new LicenseVerifierBuilder();
 }

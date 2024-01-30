@@ -1,4 +1,4 @@
-﻿namespace FluentLicensing;
+﻿namespace FluentLicensing.Models;
 
 public class LicenseAttribute
 {
