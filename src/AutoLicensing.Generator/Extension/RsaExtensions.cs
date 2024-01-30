@@ -1,18 +1,18 @@
 ﻿using AutoLicensing.Exceptions;
 using AutoLicensing.Signer;
 
-namespace AutoLicensing.Generator.Generator;
+namespace AutoLicensing.Generator.Extension;
 
 public static class RsaExtensions
 {
-    public static IGeneratorLicense WithRsaPrivateKey(this IGeneratorSigner generator, byte[] csbBlobKey)
+    public static ILicenseFactory WithRsaPrivateKey(this ILicenseFactory generator, byte[] csbBlobKey)
     {
         try
         {
             var rsaSigner = new RsaSigner(csbBlobKey);
             generator.WithSigner(rsaSigner);
 
-            return generator as IGeneratorLicense;
+            return generator;
         }
         catch (Exception exception)
         {
@@ -20,7 +20,7 @@ public static class RsaExtensions
         }
     }
 
-    public static IGeneratorLicense WithRsaPrivateKey(this IGeneratorSigner generator, string base64EncodedCsbBlobKey)
+    public static ILicenseFactory WithRsaPrivateKey(this ILicenseFactory generator, string base64EncodedCsbBlobKey)
     {
         try
         {
@@ -32,14 +32,14 @@ public static class RsaExtensions
         }
     }
 
-    public static IGeneratorLicense WithRsaPublicKey(this IGeneratorSigner generator, byte[] csbBlobKey)
+    public static ILicenseFactory WithRsaPublicKey(this ILicenseFactory generator, byte[] csbBlobKey)
     {
         try
         {
             var rsaSigner = new RsaSigner(csbBlobKey);
             generator.WithSigner(rsaSigner);
 
-            return generator as IGeneratorLicense;
+            return generator;
         }
         catch (Exception exception)
         {
@@ -47,7 +47,7 @@ public static class RsaExtensions
         }
     }
 
-    public static IGeneratorLicense WithRsaPublicKey(this IGeneratorSigner generator, string base64EncodedCsbBlobKey)
+    public static ILicenseFactory WithRsaPublicKey(this ILicenseFactory generator, string base64EncodedCsbBlobKey)
     {
         try
         {

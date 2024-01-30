@@ -19,7 +19,7 @@ public class LicenseProvider(License license, string productName) : ILicenseProv
         if (product is null)
             throw new AutoLicensingException("LicenseProduct name is not valid.");
 
-        return product.Features.ContainsKey(featureName) && product.Features[featureName];
+        return product.IsFeatureEnabled(featureName);
     }
 
     public LicenseAttribute GetAttribute(string attributeName)
@@ -29,11 +29,6 @@ public class LicenseProvider(License license, string productName) : ILicenseProv
         if (product is null)
             throw new AutoLicensingException("LicenseProduct name is not valid.");
 
-        var attribute = product.Attributes
-            .SingleOrDefault(x => x.Key == attributeName);
-        if (attribute is null)
-            throw new AutoLicensingException("Attribute not found.");
-
-        return attribute;
+        return product.GetAttribute(attributeName);
     }
 }

@@ -1,8 +1,8 @@
 ﻿using AutoLicensing;
 using AutoLicensing.Extensions;
-using AutoLicensing.Generator.Generator;
+using AutoLicensing.Generator;
+using AutoLicensing.Generator.Extension;
 using AutoLicensing.Models;
-using License = AutoLicensing.Models.License;
 
 void Validate()
 {
@@ -13,6 +13,14 @@ void Validate()
     var signedLicense = Licenser.Verifier
         .WithRsaPublicKey(publicKey)
         .LoadAndVerify(license);
+
+    var f1 = signedLicense.License
+        .GetProduct("Application 3")?
+        .IsFeatureEnabled("Feature1");
+
+    var f2 = signedLicense.License
+        .GetProduct("Application 1")?
+        .IsFeatureEnabled("Feature3");
 }
 
 void GenerateLicense()
@@ -27,47 +35,21 @@ void GenerateLicense()
     Console.WriteLine(key.PrivateKey);
     Console.WriteLine();
 
-    var license = LicenseGenerator.Generator
+    var signedLicense = new LicenseFactory()
         .WithRsaPrivateKey(key.PrivateKey)
-        .WithLicense(new License()
-        {
-            CustomerName = "Hiiii",
-            Products = new List<LicenseProduct>()
-            {
-                new()
-                {
-                    Features = new Dictionary<string, bool>()
-                    {
-                        {"Feature1",true},
-                        {"Feature2",true},
-                        {"Feature3",false},
-                    },
-                    Attributes = new List<LicenseAttribute>()
-                    {
-                        new("Insert Limitation",1_000),
-                        new("User Limitation",2),
-                    },
-                    ExpiryDate = DateTime.Now.AddDays(180)
-                },
-                new()
-                {
-                    Features = new Dictionary<string, bool>()
-                    {
-                        {"Feature4",true},
-                        {"Feature5",true},
-                        {"Feature6",false},
-                    },
-                    Attributes = new List<LicenseAttribute>()
-                    {
-                        new("Insert Limitation",1_000),
-                    },
-                    ExpiryDate = DateTime.Now.AddDays(200)
-                }
-            }
-        }).SignAndCreate();
+        .WithName("Enterprise License")
+        .WithCustomerName("Some Guy")
+        .WithProduct(new LicenseProductFactory()
+            .WithName("Application 1")
+            .WithExpiryDate(DateTime.Now.AddDays(180))
+            .WithAttribute("Limitation 1", 100)
+            .WithFeature("Feature 1")
+            .WithFeature("Feature 2")
+            .Create())
+        .SignAndCreate();
 
     Console.WriteLine("License :");
-    Console.WriteLine(license.Export());
+    Console.WriteLine(signedLicense.Export());
 }
 
 try
