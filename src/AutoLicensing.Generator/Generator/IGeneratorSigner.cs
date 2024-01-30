@@ -1,6 +1,6 @@
 ﻿using AutoLicensing.Signer;
 
-namespace AutoLicensing.Generator;
+namespace AutoLicensing.Generator.Generator;
 
 public interface IGeneratorSigner
 {

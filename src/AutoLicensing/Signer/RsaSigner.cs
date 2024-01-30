@@ -6,16 +6,10 @@ using Newtonsoft.Json;
 
 namespace AutoLicensing.Signer;
 
-public class RsaSigner : ISigner
+public class RsaSigner() : ISigner
 {
-    private readonly RSACryptoServiceProvider _cryptoServiceProvider;
-    private readonly HashAlgorithm _hashAlgorithm;
-
-    public RsaSigner()
-    {
-        _cryptoServiceProvider = new RSACryptoServiceProvider();
-        _hashAlgorithm = SHA512.Create();
-    }
+    private readonly RSACryptoServiceProvider _cryptoServiceProvider = new();
+    private readonly HashAlgorithm _hashAlgorithm = SHA512.Create();
 
     public RsaSigner(string base64EncodedCsbBlobKey)
         : this(Convert.FromBase64String(base64EncodedCsbBlobKey))
@@ -30,9 +24,8 @@ public class RsaSigner : ISigner
     public bool Verify(SignedLicense signedLicense)
     {
         var signature = signedLicense.Signature;
-        signedLicense.Signature = null;
 
-        var bytesContent = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(signedLicense));
+        var bytesContent = Encoding.UTF8.GetBytes(signedLicense.LicenseKey);
         var bytesSignature = Convert.FromBase64String(signature);
 
         bytesSignature = bytesSignature.UnConfuse();
@@ -41,7 +34,7 @@ public class RsaSigner : ISigner
 
     public void Sign(SignedLicense signedLicense)
     {
-        var bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(signedLicense));
+        var bytes = Encoding.UTF8.GetBytes(signedLicense.LicenseKey);
         var signature = _cryptoServiceProvider.SignData(bytes, _hashAlgorithm);
         signature = signature.UnConfuse();
         var base64Signing = Convert.ToBase64String(signature);

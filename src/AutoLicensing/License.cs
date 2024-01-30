@@ -2,7 +2,7 @@
 
 namespace AutoLicensing;
 
-public static class License
+public static class Licenser
 {
     public static IVerifierSignerBuilder Verifier => new LicenseVerifierBuilder();
 }

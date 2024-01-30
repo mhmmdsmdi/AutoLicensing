@@ -9,13 +9,13 @@ public static class ServiceProviderExtensions
         string publicKey,
         string license)
     {
-        var signedLicense = License.Verifier
+        var signedLicense = Licenser.Verifier
             .WithRsaPublicKey(publicKey)
             .LoadAndVerify(license);
 
         services.AddSingleton(signedLicense);
 
-        services.AddSingleton<ILicenseProvider>(new LicenseProvider(signedLicense, productName));
+        services.AddSingleton<ILicenseProvider>(new LicenseProvider(signedLicense.License, productName));
 
         return services;
     }

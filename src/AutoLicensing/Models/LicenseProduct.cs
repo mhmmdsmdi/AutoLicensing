@@ -1,6 +1,6 @@
 ﻿namespace AutoLicensing.Models;
 
-public class Product
+public class LicenseProduct
 {
     public string Name { get; set; }
 

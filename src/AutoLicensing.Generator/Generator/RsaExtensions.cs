@@ -1,7 +1,7 @@
 ﻿using AutoLicensing.Exceptions;
 using AutoLicensing.Signer;
 
-namespace AutoLicensing.Generator;
+namespace AutoLicensing.Generator.Generator;
 
 public static class RsaExtensions
 {

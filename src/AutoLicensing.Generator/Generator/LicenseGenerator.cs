@@ -1,13 +1,13 @@
 ﻿using AutoLicensing.Models;
 using AutoLicensing.Signer;
 
-namespace AutoLicensing.Generator;
+namespace AutoLicensing.Generator.Generator;
 
 public class LicenseGenerator : IGenerator, IGeneratorLicense, IGeneratorSigner
 {
     public static IGeneratorSigner Generator => new LicenseGenerator();
 
-    private SignedLicense _signedLicense = new();
+    private License _license = new();
 
     private ISigner _signer;
 
@@ -17,15 +17,18 @@ public class LicenseGenerator : IGenerator, IGeneratorLicense, IGeneratorSigner
         return this;
     }
 
-    public IGenerator WithLicense(SignedLicense license)
+    public IGenerator WithLicense(License license)
     {
-        _signedLicense = license;
+        _license = license;
         return this;
     }
 
     public SignedLicense SignAndCreate()
     {
-        _signer.Sign(_signedLicense);
-        return _signedLicense;
+        var signedLicense = new SignedLicense(_license);
+
+        _signer.Sign(signedLicense);
+
+        return signedLicense;
     }
 }
