@@ -6,8 +6,6 @@ namespace FluentLicensing;
 
 public class LicenseManager
 {
-    private readonly RSACryptoServiceProvider _rsaCryptoServiceProvider;
-
     public License License { get; }
 
     public LicenseData Data { get; }
@@ -16,11 +14,11 @@ public class LicenseManager
     {
         License = license;
 
-        _rsaCryptoServiceProvider = new RSACryptoServiceProvider(publicKey.Size);
-        _rsaCryptoServiceProvider.FromXmlString(publicKey.Key);
+        var rsaCryptoServiceProvider = new RSACryptoServiceProvider(publicKey.Size);
+        rsaCryptoServiceProvider.FromXmlString(publicKey.Key);
 
         var dataByte = license.ToBytes();
-        var decryptedByte = _rsaCryptoServiceProvider.Decrypt(dataByte, false);
+        var decryptedByte = rsaCryptoServiceProvider.Decrypt(dataByte, false);
 
         var json = Encoding.UTF8.GetString(decryptedByte);
 

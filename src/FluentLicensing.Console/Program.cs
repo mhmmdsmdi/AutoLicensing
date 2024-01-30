@@ -1,40 +1,85 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using FluentLicensing;
+using FluentLicensing.Generator;
 
-var rsa = new RSACryptoServiceProvider(2048);
-var privateKey = rsa.ToXmlString(true);
-var publicKey = rsa.ToXmlString(false);
+var keySize = 2 * 1024;
+var sampleData = Encoding.UTF8.GetBytes("My Name Is Mohammad");
 
-Console.WriteLine("Private EncryptKey: " + Convert.ToBase64String(Encoding.UTF8.GetBytes(privateKey)) + Environment.NewLine);
-Console.WriteLine("Public EncryptKey: " + Convert.ToBase64String(Encoding.UTF8.GetBytes(publicKey)) + Environment.NewLine);
+// =============================== AES
 
-var text = "Stringa da Criptare@#[]123123";
-Console.WriteLine("Text to encrypt: " + Environment.NewLine + text + Environment.NewLine);
-var enc = Encrypt(text);
-Console.WriteLine("Encrypted Text: " + Environment.NewLine + enc + Environment.NewLine);
-var dec = Decrypt(enc);
-Console.WriteLine("Decrypted Text: " + Environment.NewLine + dec + Environment.NewLine);
+// =============================== Test Public and Private Key
 
-string Encrypt(string data)
-{
-    RSACryptoServiceProvider rsa = new();
-    rsa.FromXmlString(publicKey);
+//var keyGenerator = new RSACryptoServiceProvider(keySize);
+//var privateKey = keyGenerator.ToXmlString(true);
+//var publicKey = keyGenerator.ToXmlString(false);
 
-    byte[] dataToEncrypt = Encoding.ASCII.GetBytes(data);
-    byte[] encryptedByteArray = rsa.Encrypt(dataToEncrypt, false).ToArray();
+//var privateCrypto = new RSACryptoServiceProvider(keySize);
+//privateCrypto.FromXmlString(privateKey);
+//var privateEncrypted = privateCrypto.Encrypt(sampleData, false);
+//var privateDecrypted = privateCrypto.Decrypt(privateEncrypted, false);
 
-    return Convert.ToBase64String(encryptedByteArray);
-}
+//var publicCrypto = new RSACryptoServiceProvider(keySize);
+//publicCrypto.FromXmlString(publicKey);
+//var publicEncrypted = publicCrypto.Encrypt(sampleData, false);
+//var publicDecrypted = publicCrypto.Decrypt(publicEncrypted, false);
 
-string Decrypt(string data)
-{
-    RSACryptoServiceProvider rsa = new();
-    rsa.FromXmlString(privateKey);
+// =============================== Generator
+//var licenseGenerator = new LicenseGenerator(keySize);
 
-    byte[] dataByte = Convert.FromBase64String(data);
-    byte[] decryptedByte = rsa.Decrypt(dataByte, false);
+//var privateKey = licenseGenerator.PrivateKey.ToBase64();
+//var publicKey = licenseGenerator.PublicKey.ToBase64();
+//Console.WriteLine("Private EncryptKey: ");
+//Console.WriteLine(privateKey);
+//Console.WriteLine();
 
-    return Encoding.UTF8.GetString(decryptedByte);
-}
+//Console.WriteLine("Public EncryptKey: ");
+//Console.WriteLine(publicKey);
+//Console.WriteLine();
+
+//var license = licenseGenerator.Generate(new LicenseData("Test Company")
+//{
+//    Products = new List<ProductLicense>()
+//    {
+//        new()
+//        {
+//            Features = new Dictionary<string, bool>()
+//            {
+//                {"Feature1",true},
+//                {"Feature2",true},
+//                {"Feature3",false},
+//            },
+//            Attributes = new List<LicenseAttribute>()
+//            {
+//                new("Insert Limitation",1_000),
+//                new("User Limitation",2),
+//            },
+//            Expiry = DateTime.Now.AddDays(180)
+//        },
+//        new()
+//        {
+//            Features = new Dictionary<string, bool>()
+//            {
+//                {"Feature4",true},
+//                {"Feature5",true},
+//                {"Feature6",false},
+//            },
+//            Attributes = new List<LicenseAttribute>()
+//            {
+//                new("Insert Limitation",1_000),
+//            },
+//            Expiry = DateTime.Now.AddDays(200)
+//        }
+//    }
+//});
+
+//Console.WriteLine("License :");
+//Console.WriteLine(license.Key);
+//Console.WriteLine();
+
+//var licenseManager = new LicenseManager(EncryptKey.FromBase64(publicKey, keySize), new License(license.Key));
+
+//var data = licenseManager.Data;

@@ -6,12 +6,12 @@ namespace FluentLicensing;
 /// Public/Private encryption key
 /// </summary>
 /// <param name="key">RSA xml key</param>
-public class EncryptKey(string key, int size)
+public class EncryptKey(string xmlKey, int size = 2048)
 {
     /// <summary>
     /// RSA Crypto XML Key
     /// </summary>
-    public string Key { get; } = key;
+    public string Key { get; } = xmlKey;
 
     public int Size { get; } = size;
 
