@@ -1,4 +1,4 @@
-﻿namespace FluentLicensing.Signer;
+﻿namespace AutoLicensing.Signer;
 
 public class SigningKeyPair
 {

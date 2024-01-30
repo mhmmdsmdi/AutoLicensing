@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace FluentLicensing.Models;
+namespace AutoLicensing.Models;
 
 public class LicenseAttribute
 {

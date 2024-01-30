@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace FluentLicensing.Extensions.DependencyInjection.Extensions;
+namespace AutoLicensing.Extensions.DependencyInjection.Extensions;
 
 public static class ServiceProviderExtensions
 {
-    public static IServiceCollection AddFluentLicensing(this IServiceCollection services,
+    public static IServiceCollection AddAutoLicensing(this IServiceCollection services,
         string productName,
         string publicKey,
         string license)

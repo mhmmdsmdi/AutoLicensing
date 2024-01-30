@@ -1,6 +1,6 @@
-﻿using FluentLicensing.Models;
+﻿using AutoLicensing.Models;
 
-namespace FluentLicensing.Signer;
+namespace AutoLicensing.Signer;
 
 public interface ISigner
 {

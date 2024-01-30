@@ -1,8 +1,8 @@
-﻿using FluentLicensing.Exceptions;
-using FluentLicensing.Models;
-using FluentLicensing.Signer;
+﻿using AutoLicensing.Exceptions;
+using AutoLicensing.Models;
+using AutoLicensing.Signer;
 
-namespace FluentLicensing.Verifier;
+namespace AutoLicensing.Verifier;
 
 internal class LicenseVerifierBuilder : IVerifierBuilder, IVerifierSignerBuilder
 {
@@ -18,7 +18,7 @@ internal class LicenseVerifierBuilder : IVerifierBuilder, IVerifierSignerBuilder
     {
         var signedLicense = SignedLicense.Import(content);
         if (!_signer.Verify(signedLicense))
-            throw new FluentLicensingException("License is not Valid");
+            throw new AutoLicensingException("License is not Valid");
 
         return signedLicense;
     }

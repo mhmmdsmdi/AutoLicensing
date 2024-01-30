@@ -1,7 +1,7 @@
-﻿using FluentLicensing.Builder;
-using FluentLicensing.Verifier;
+﻿using AutoLicensing.Builder;
+using AutoLicensing.Verifier;
 
-namespace FluentLicensing;
+namespace AutoLicensing;
 
 public static class License
 {

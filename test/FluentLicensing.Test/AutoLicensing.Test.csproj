@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FluentLicensing\FluentLicensing.csproj" />
+    <ProjectReference Include="..\..\src\FluentLicensing\AutoLicensing.csproj" />
   </ItemGroup>
 
 </Project>

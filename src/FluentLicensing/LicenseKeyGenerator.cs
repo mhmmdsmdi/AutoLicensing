@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
-using FluentLicensing.Signer;
+using AutoLicensing.Signer;
 
-namespace FluentLicensing;
+namespace AutoLicensing;
 
 public static class LicenseKeyGenerator
 {

@@ -1,7 +1,7 @@
-﻿using FluentLicensing.Models;
-using FluentLicensing.Signer;
+﻿using AutoLicensing.Models;
+using AutoLicensing.Signer;
 
-namespace FluentLicensing.Builder;
+namespace AutoLicensing.Builder;
 
 internal class LicenseGenerator : IGenerator, IGeneratorLicense, IGeneratorSigner
 {

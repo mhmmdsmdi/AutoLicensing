@@ -1,7 +1,7 @@
-﻿using FluentLicensing.Exceptions;
-using FluentLicensing.Models;
+﻿using AutoLicensing.Exceptions;
+using AutoLicensing.Models;
 
-namespace FluentLicensing.Extensions.DependencyInjection;
+namespace AutoLicensing.Extensions.DependencyInjection;
 
 public interface ILicenseProvider
 {
@@ -17,7 +17,7 @@ public class LicenseProvider(SignedLicense signedLicense, string productName) : 
         var product = signedLicense.Products
             .FirstOrDefault(x => x.Name == productName);
         if (product is null)
-            throw new FluentLicensingException("Product name is not valid.");
+            throw new AutoLicensingException("Product name is not valid.");
 
         return product.Features.ContainsKey(featureName) && product.Features[featureName];
     }
@@ -27,12 +27,12 @@ public class LicenseProvider(SignedLicense signedLicense, string productName) : 
         var product = signedLicense.Products
             .FirstOrDefault(x => x.Name == productName);
         if (product is null)
-            throw new FluentLicensingException("Product name is not valid.");
+            throw new AutoLicensingException("Product name is not valid.");
 
         var attribute = product.Attributes
             .SingleOrDefault(x => x.Key == attributeName);
         if (attribute is null)
-            throw new FluentLicensingException("Attribute not found.");
+            throw new AutoLicensingException("Attribute not found.");
 
         return attribute;
     }

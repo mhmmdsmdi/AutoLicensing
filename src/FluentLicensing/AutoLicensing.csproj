@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <Title>AutoLicensing</Title>
+    <Authors>mhmdsmdi</Authors>
+    <Description>AutoLicensing is an open-source license manager.</Description>
+    <PackageProjectUrl>https://github.com/mhmmdsmdi/AutoLicensing</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mhmmdsmdi/AutoLicensing</RepositoryUrl>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+</Project>

@@ -1,6 +1,6 @@
-﻿using FluentLicensing;
-using FluentLicensing.Extensions;
-using FluentLicensing.Models;
+﻿using AutoLicensing;
+using AutoLicensing.Extensions;
+using AutoLicensing.Models;
 
 void Validate()
 {

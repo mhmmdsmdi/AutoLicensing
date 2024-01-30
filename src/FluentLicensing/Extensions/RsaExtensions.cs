@@ -1,9 +1,9 @@
-﻿using FluentLicensing.Builder;
-using FluentLicensing.Exceptions;
-using FluentLicensing.Signer;
-using FluentLicensing.Verifier;
+﻿using AutoLicensing.Builder;
+using AutoLicensing.Exceptions;
+using AutoLicensing.Signer;
+using AutoLicensing.Verifier;
 
-namespace FluentLicensing.Extensions;
+namespace AutoLicensing.Extensions;
 
 public static class RsaExtensions
 {
@@ -18,7 +18,7 @@ public static class RsaExtensions
         }
         catch (Exception exception)
         {
-            throw new FluentLicensingException(exception.Message);
+            throw new AutoLicensingException(exception.Message);
         }
     }
 
@@ -30,7 +30,7 @@ public static class RsaExtensions
         }
         catch (Exception exception)
         {
-            throw new FluentLicensingException(exception.Message);
+            throw new AutoLicensingException(exception.Message);
         }
     }
 
@@ -45,7 +45,7 @@ public static class RsaExtensions
         }
         catch (Exception exception)
         {
-            throw new FluentLicensingException(exception.Message);
+            throw new AutoLicensingException(exception.Message);
         }
     }
 
@@ -57,7 +57,7 @@ public static class RsaExtensions
         }
         catch (Exception exception)
         {
-            throw new FluentLicensingException(exception.Message);
+            throw new AutoLicensingException(exception.Message);
         }
     }
 
@@ -72,7 +72,7 @@ public static class RsaExtensions
         }
         catch (Exception exception)
         {
-            throw new FluentLicensingException(exception.Message);
+            throw new AutoLicensingException(exception.Message);
         }
     }
 
@@ -84,7 +84,7 @@ public static class RsaExtensions
         }
         catch (Exception exception)
         {
-            throw new FluentLicensingException(exception.Message);
+            throw new AutoLicensingException(exception.Message);
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using FluentLicensing.Models;
+﻿using AutoLicensing.Models;
 
-namespace FluentLicensing.Verifier;
+namespace AutoLicensing.Verifier;
 
 public interface IVerifierBuilder
 {

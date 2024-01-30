@@ -1,7 +1,4 @@
-﻿using FluentLicensing.Signer;
-using System.Security.Cryptography;
-
-namespace FluentLicensing.Extensions;
+﻿namespace AutoLicensing.Extensions;
 
 public static class Confuser
 {

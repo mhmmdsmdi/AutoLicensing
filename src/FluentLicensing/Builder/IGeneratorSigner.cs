@@ -1,6 +1,6 @@
-﻿using FluentLicensing.Signer;
+﻿using AutoLicensing.Signer;
 
-namespace FluentLicensing.Builder;
+namespace AutoLicensing.Builder;
 
 public interface IGeneratorSigner
 {

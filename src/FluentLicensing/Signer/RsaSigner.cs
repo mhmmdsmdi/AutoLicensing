@@ -1,10 +1,10 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using FluentLicensing.Extensions;
-using FluentLicensing.Models;
+using AutoLicensing.Extensions;
+using AutoLicensing.Models;
 using Newtonsoft.Json;
 
-namespace FluentLicensing.Signer;
+namespace AutoLicensing.Signer;
 
 internal class RsaSigner : ISigner
 {

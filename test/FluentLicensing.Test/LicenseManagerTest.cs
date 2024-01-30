@@ -1,6 +1,4 @@
-using System.Diagnostics;
-
-namespace FluentLicensing.Test;
+namespace AutoLicensing.Test;
 
 public class VerifierBuilderTest
 {

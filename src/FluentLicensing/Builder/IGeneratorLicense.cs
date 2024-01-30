@@ -1,6 +1,6 @@
-﻿using FluentLicensing.Models;
+﻿using AutoLicensing.Models;
 
-namespace FluentLicensing.Builder;
+namespace AutoLicensing.Builder;
 
 public interface IGeneratorLicense
 {

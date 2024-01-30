@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
 
-namespace FluentLicensing.Models;
+namespace AutoLicensing.Models;
 
 public class SignedLicense
 {

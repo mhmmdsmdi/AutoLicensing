@@ -1,4 +1,4 @@
-﻿namespace FluentLicensing.Models;
+﻿namespace AutoLicensing.Models;
 
 public static class LicenseAttributeExtensions
 {

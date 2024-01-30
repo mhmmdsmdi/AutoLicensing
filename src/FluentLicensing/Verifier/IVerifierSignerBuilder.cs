@@ -1,6 +1,6 @@
-﻿using FluentLicensing.Signer;
+﻿using AutoLicensing.Signer;
 
-namespace FluentLicensing.Verifier;
+namespace AutoLicensing.Verifier;
 
 public interface IVerifierSignerBuilder
 {
