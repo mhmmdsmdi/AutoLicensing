@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentLicensing", "src\Flue
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentLicensing.Console", "src\FluentLicensing.Console\FluentLicensing.Console.csproj", "{14099930-4B34-42D7-9DD9-01073E117C53}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentLicensing.Generator", "src\FluentLicensing.Generator\FluentLicensing.Generator.csproj", "{01BEE9FB-8FCD-40A3-BEB4-71B504DD0067}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FDC2E5C3-D58A-427F-8464-AA9FC1CEDAE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentLicensing.Test", "test\FluentLicensing.Test\FluentLicensing.Test.csproj", "{F44944F9-3D28-411E-896A-A589413D8FBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentLicensing.Test", "test\FluentLicensing.Test\FluentLicensing.Test.csproj", "{F44944F9-3D28-411E-896A-A589413D8FBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentLicensing.Extensions.DependencyInjection", "src\FluentLicensing.Extensions.DependencyInjection\FluentLicensing.Extensions.DependencyInjection.csproj", "{92E9F1BC-18E5-44CE-A403-84E364723ACE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,14 +27,14 @@ Global
 		{14099930-4B34-42D7-9DD9-01073E117C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14099930-4B34-42D7-9DD9-01073E117C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14099930-4B34-42D7-9DD9-01073E117C53}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01BEE9FB-8FCD-40A3-BEB4-71B504DD0067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01BEE9FB-8FCD-40A3-BEB4-71B504DD0067}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01BEE9FB-8FCD-40A3-BEB4-71B504DD0067}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01BEE9FB-8FCD-40A3-BEB4-71B504DD0067}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F44944F9-3D28-411E-896A-A589413D8FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F44944F9-3D28-411E-896A-A589413D8FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F44944F9-3D28-411E-896A-A589413D8FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F44944F9-3D28-411E-896A-A589413D8FBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E9F1BC-18E5-44CE-A403-84E364723ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E9F1BC-18E5-44CE-A403-84E364723ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E9F1BC-18E5-44CE-A403-84E364723ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E9F1BC-18E5-44CE-A403-84E364723ACE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

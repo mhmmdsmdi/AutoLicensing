@@ -68,3 +68,12 @@ void GenerateLicense()
     Console.WriteLine("License :");
     Console.WriteLine(license.Export());
 }
+
+try
+{
+    Validate();
+}
+catch (Exception e)
+{
+    Console.WriteLine(e);
+}

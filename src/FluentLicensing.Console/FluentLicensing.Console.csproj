@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FluentLicensing.Generator\FluentLicensing.Generator.csproj" />
     <ProjectReference Include="..\FluentLicensing\FluentLicensing.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using FluentLicensing.Builder;
+using FluentLicensing.Exceptions;
 using FluentLicensing.Signer;
 using FluentLicensing.Verifier;
 
@@ -8,40 +9,82 @@ public static class RsaExtensions
 {
     public static IGeneratorLicense WithRsaPrivateKey(this IGeneratorSigner generator, byte[] csbBlobKey)
     {
-        var rsaSigner = new RsaSigner(csbBlobKey);
-        generator.WithSigner(rsaSigner);
+        try
+        {
+            var rsaSigner = new RsaSigner(csbBlobKey);
+            generator.WithSigner(rsaSigner);
 
-        return generator as IGeneratorLicense;
+            return generator as IGeneratorLicense;
+        }
+        catch (Exception exception)
+        {
+            throw new FluentLicensingException(exception.Message);
+        }
     }
 
     public static IGeneratorLicense WithRsaPrivateKey(this IGeneratorSigner generator, string base64EncodedCsbBlobKey)
-        => generator.WithRsaPrivateKey(Convert.FromBase64String(base64EncodedCsbBlobKey));
+    {
+        try
+        {
+            return generator.WithRsaPrivateKey(Convert.FromBase64String(base64EncodedCsbBlobKey));
+        }
+        catch (Exception exception)
+        {
+            throw new FluentLicensingException(exception.Message);
+        }
+    }
 
     public static IGeneratorLicense WithRsaPublicKey(this IGeneratorSigner generator, byte[] csbBlobKey)
     {
-        var rsaSigner = new RsaSigner(csbBlobKey);
-        generator.WithSigner(rsaSigner);
+        try
+        {
+            var rsaSigner = new RsaSigner(csbBlobKey);
+            generator.WithSigner(rsaSigner);
 
-        return generator as IGeneratorLicense;
+            return generator as IGeneratorLicense;
+        }
+        catch (Exception exception)
+        {
+            throw new FluentLicensingException(exception.Message);
+        }
     }
 
     public static IGeneratorLicense WithRsaPublicKey(this IGeneratorSigner generator, string base64EncodedCsbBlobKey)
-        => generator.WithRsaPublicKey(Convert.FromBase64String(base64EncodedCsbBlobKey));
+    {
+        try
+        {
+            return generator.WithRsaPublicKey(Convert.FromBase64String(base64EncodedCsbBlobKey));
+        }
+        catch (Exception exception)
+        {
+            throw new FluentLicensingException(exception.Message);
+        }
+    }
 
-    /// <summary>
-    /// //////////////////////////////
-    /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="csbBlobKey"></param>
-    /// <returns></returns>
     public static IVerifierBuilder WithRsaPublicKey(this IVerifierSignerBuilder builder, byte[] csbBlobKey)
     {
-        var rsaSigner = new RsaSigner(csbBlobKey);
-        builder.WithSigner(rsaSigner);
+        try
+        {
+            var rsaSigner = new RsaSigner(csbBlobKey);
+            builder.WithSigner(rsaSigner);
 
-        return builder as IVerifierBuilder;
+            return builder as IVerifierBuilder;
+        }
+        catch (Exception exception)
+        {
+            throw new FluentLicensingException(exception.Message);
+        }
     }
 
     public static IVerifierBuilder WithRsaPublicKey(this IVerifierSignerBuilder builder, string base64EncodedCsbBlobKey)
-        => builder.WithRsaPublicKey(Convert.FromBase64String(base64EncodedCsbBlobKey));
+    {
+        try
+        {
+            return builder.WithRsaPublicKey(Convert.FromBase64String(base64EncodedCsbBlobKey));
+        }
+        catch (Exception exception)
+        {
+            throw new FluentLicensingException(exception.Message);
+        }
+    }
 }

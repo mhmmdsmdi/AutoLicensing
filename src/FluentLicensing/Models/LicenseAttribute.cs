@@ -1,4 +1,6 @@
-﻿namespace FluentLicensing.Models;
+﻿using System.Globalization;
+
+namespace FluentLicensing.Models;
 
 public class LicenseAttribute
 {
@@ -21,19 +23,10 @@ public class LicenseAttribute
     public LicenseAttribute(string key, decimal value)
     {
         Key = key;
-        Value = value.ToString();
+        Value = value.ToString(CultureInfo.InvariantCulture);
     }
 
     public string Key { get; set; }
 
     public string Value { get; set; }
-
-    public int GetInt()
-        => Convert.ToInt32(Value);
-
-    public string GetString()
-        => Value;
-
-    public decimal GetDecimal()
-        => Convert.ToDecimal(Value);
 }
