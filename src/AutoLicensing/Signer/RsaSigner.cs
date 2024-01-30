@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace AutoLicensing.Signer;
 
-internal class RsaSigner : ISigner
+public class RsaSigner : ISigner
 {
     private readonly RSACryptoServiceProvider _cryptoServiceProvider;
     private readonly HashAlgorithm _hashAlgorithm;

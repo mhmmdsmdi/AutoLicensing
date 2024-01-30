@@ -1,10 +1,12 @@
 ﻿using AutoLicensing.Models;
 using AutoLicensing.Signer;
 
-namespace AutoLicensing.Builder;
+namespace AutoLicensing.Generator;
 
-internal class LicenseGenerator : IGenerator, IGeneratorLicense, IGeneratorSigner
+public class LicenseGenerator : IGenerator, IGeneratorLicense, IGeneratorSigner
 {
+    public static IGeneratorSigner Generator => new LicenseGenerator();
+
     private SignedLicense _signedLicense = new();
 
     private ISigner _signer;

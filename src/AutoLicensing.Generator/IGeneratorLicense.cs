@@ -1,6 +1,6 @@
 ﻿using AutoLicensing.Models;
 
-namespace AutoLicensing.Builder;
+namespace AutoLicensing.Generator;
 
 public interface IGeneratorLicense
 {

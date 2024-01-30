@@ -1,5 +1,6 @@
 ﻿using AutoLicensing;
 using AutoLicensing.Extensions;
+using AutoLicensing.Generator;
 using AutoLicensing.Models;
 
 void Validate()
@@ -26,7 +27,7 @@ void GenerateLicense()
     Console.WriteLine(key.PrivateKey);
     Console.WriteLine();
 
-    var license = License.Generator
+    var license = LicenseGenerator.Generator
         .WithRsaPrivateKey(key.PrivateKey)
         .WithLicense(new SignedLicense()
         {

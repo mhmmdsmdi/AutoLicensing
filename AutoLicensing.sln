@@ -11,9 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FDC2E5C3-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoLicensing.Test", "test\AutoLicensing.Test\AutoLicensing.Test.csproj", "{F44944F9-3D28-411E-896A-A589413D8FBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLicensing.Extensions.DependencyInjection", "src\AutoLicensing.Extensions.DependencyInjection\AutoLicensing.Extensions.DependencyInjection.csproj", "{92E9F1BC-18E5-44CE-A403-84E364723ACE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoLicensing.Extensions.DependencyInjection", "src\AutoLicensing.Extensions.DependencyInjection\AutoLicensing.Extensions.DependencyInjection.csproj", "{92E9F1BC-18E5-44CE-A403-84E364723ACE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLicensing.AspNetCore", "src\AutoLicensing.AspNetCore\AutoLicensing.AspNetCore.csproj", "{1DDD8DA7-539A-4E56-9E29-F4490134E7CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoLicensing.AspNetCore", "src\AutoLicensing.AspNetCore\AutoLicensing.AspNetCore.csproj", "{1DDD8DA7-539A-4E56-9E29-F4490134E7CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLicensing.Generator", "src\AutoLicensing.Generator\AutoLicensing.Generator.csproj", "{EFA7BFBB-B176-4546-AAB0-EBC83F6C3D83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{1DDD8DA7-539A-4E56-9E29-F4490134E7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DDD8DA7-539A-4E56-9E29-F4490134E7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DDD8DA7-539A-4E56-9E29-F4490134E7CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFA7BFBB-B176-4546-AAB0-EBC83F6C3D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA7BFBB-B176-4546-AAB0-EBC83F6C3D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA7BFBB-B176-4546-AAB0-EBC83F6C3D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA7BFBB-B176-4546-AAB0-EBC83F6C3D83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
