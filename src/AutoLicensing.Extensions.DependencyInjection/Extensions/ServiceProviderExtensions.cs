@@ -15,7 +15,7 @@ public static class ServiceProviderExtensions
 
         services.AddSingleton(signedLicense);
 
-        services.AddSingleton<ILicenseProvider>(new LicenseProvider(signedLicense.License, productName));
+        services.AddSingleton<ILicenseProvider>(new LicenseProvider(signedLicense, productName));
 
         return services;
     }
