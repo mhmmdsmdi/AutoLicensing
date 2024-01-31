@@ -25,7 +25,7 @@ public class LicenseProvider : ILicenseProvider
 
         LicenseProduct = licenseProduct ?? throw new AutoLicensingException("License product name is not valid.");
 
-        if (LicenseProduct.ExpiryDate >= DateTime.Now.ToUniversalTime())
+        if (DateTime.Now >= LicenseProduct.ExpiryDate)
             throw new AutoLicensingException($"License for {LicenseProduct.Name} product is expired.");
     }
 
