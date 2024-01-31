@@ -1,7 +1,8 @@
 ﻿using AutoLicensing.Exceptions;
+using AutoLicensing.Extensions;
 using AutoLicensing.Models;
 
-namespace AutoLicensing.Extensions.DependencyInjection;
+namespace AutoLicensing.AspNetCore;
 
 public interface ILicenseProvider
 {

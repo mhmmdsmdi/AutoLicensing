@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using AutoLicensing.AspNetCore.Attributes;
-using AutoLicensing.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 
