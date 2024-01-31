@@ -7,34 +7,38 @@ public interface ILicenseProvider
 {
     public SignedLicense SignedLicense { get; }
 
-    public LicenseProduct? LicenseProduct { get; }
+    public LicenseProduct LicenseProduct { get; }
 
     bool IsFeatureEnabled(string featureName);
 
     LicenseAttribute GetAttribute(string attributeName);
 }
 
-public class LicenseProvider(SignedLicense signedLicense, string productName) : ILicenseProvider
+public class LicenseProvider : ILicenseProvider
 {
-    public SignedLicense SignedLicense { get; } = signedLicense;
+    public LicenseProvider(SignedLicense signedLicense, string productName)
+    {
+        SignedLicense = signedLicense;
 
-    public LicenseProduct? LicenseProduct { get; } = signedLicense.License.GetProduct(productName);
+        var licenseProduct = signedLicense.License.GetProduct(productName);
+
+        LicenseProduct = licenseProduct ?? throw new AutoLicensingException("License product name is not valid.");
+
+        if (LicenseProduct.ExpiryDate >= DateTime.Now.ToUniversalTime())
+            throw new AutoLicensingException($"License for {LicenseProduct.Name} product is expired.");
+    }
+
+    public SignedLicense SignedLicense { get; }
+
+    public LicenseProduct LicenseProduct { get; }
 
     public bool IsFeatureEnabled(string featureName)
     {
-        var product = signedLicense.License.GetProduct(productName);
-        if (product is null)
-            throw new AutoLicensingException("LicenseProduct name is not valid.");
-
-        return product.IsFeatureEnabled(featureName);
+        return LicenseProduct.IsFeatureEnabled(featureName);
     }
 
     public LicenseAttribute GetAttribute(string attributeName)
     {
-        var product = signedLicense.License.GetProduct(productName);
-        if (product is null)
-            throw new AutoLicensingException("LicenseProduct name is not valid.");
-
-        return product.GetAttribute(attributeName);
+        return LicenseProduct.GetAttribute(attributeName);
     }
 }
