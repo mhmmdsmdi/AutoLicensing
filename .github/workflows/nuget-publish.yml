@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write # issue OIDC token for NuGet trusted publishing
 
 jobs:
   publish:
@@ -30,13 +31,19 @@ jobs:
           # Exclude the Console app package; only the three libraries are published
           rm -f packages/AutoLicensing.Console.*.nupkg
 
+      # Exchange the GitHub OIDC token for a short-lived NuGet API key
+      # (https://learn.microsoft.com/en-us/nuget/nuget-org/trusted-publishing)
+      - name: NuGet login
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }} # your nuget.org profile name, not email
+
       - name: Push to NuGet
-        env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           for pkg in packages/*.nupkg; do
             dotnet nuget push "$pkg" \
-              --api-key "$NUGET_API_KEY" \
+              --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
               --source https://api.nuget.org/v3/index.json \
               --skip-duplicate
           done
