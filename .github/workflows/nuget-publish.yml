@@ -19,10 +19,14 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Build packages
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          dotnet build AutoLicensing.slnx -c Release -p:Version="$VERSION" --nologo
       - name: Pack packages
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          dotnet pack AutoLicensing.slnx -c Release -o packages -p:Version="$VERSION" --nologo
+          dotnet pack AutoLicensing.slnx -c Release -o packages -p:Version="$VERSION" --no-build --nologo
           # Exclude the Console app package; only the three libraries are published
           rm -f packages/AutoLicensing.Console.*.nupkg
 

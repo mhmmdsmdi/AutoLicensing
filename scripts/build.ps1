@@ -13,8 +13,12 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 $out = Join-Path $root "packages"
 
-# 1. Build + pack all packages (GeneratePackageOnBuild is already on)
-dotnet pack (Join-Path $root "AutoLicensing.slnx") -c $Configuration -o $out --nologo
+# 1. Build all projects, then pack (multi-TFM pack without --no-build races
+#    against parallel builds and can fail with NU5026)
+dotnet build (Join-Path $root "AutoLicensing.slnx") -c $Configuration --nologo
+if ($LASTEXITCODE -ne 0) { throw "dotnet build failed." }
+
+dotnet pack (Join-Path $root "AutoLicensing.slnx") -c $Configuration -o $out --no-build --nologo
 if ($LASTEXITCODE -ne 0) { throw "dotnet pack failed." }
 
 # 2. Remove the app package — only the three libraries are published
