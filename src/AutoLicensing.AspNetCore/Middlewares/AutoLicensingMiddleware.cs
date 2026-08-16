@@ -2,9 +2,9 @@ using System.Net;
 using AutoLicensing.AspNetCore.Attributes;
 using Microsoft.AspNetCore.Http;
 
-namespace AutoLicensing.AspNetCore.MiddleWares;
+namespace AutoLicensing.AspNetCore.Middlewares;
 
-public class AutoLicensingMiddleWare(RequestDelegate next)
+public class AutoLicensingMiddleware(RequestDelegate next)
 {
     public async Task Invoke(HttpContext context, ILicenseProvider licenseProvider)
     {

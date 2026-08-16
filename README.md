@@ -12,7 +12,7 @@ Open-source license manager for .NET. Generate RSA-signed licenses, embed featur
 | --- | --- |
 | `AutoLicensing` | Core: license model, RSA signing/verification, key generation |
 | `AutoLicensing.Generator` | Fluent license builders for issuing licenses |
-| `AutoLicensing.AspNetCore` | DI registration + endpoint middleware that blocks disabled features |
+| `AutoLicensing.AspNetCore` | DI registration + middleware / MVC filter that blocks disabled features |
 
 ## Install
 
@@ -110,6 +110,17 @@ public IActionResult Premium() => Ok("Premium endpoint");
 ```
 
 > **SSE / streaming:** the middleware only buffers the response when the endpoint is not yet resolved (i.e. registered *before* `UseRouting`). Register it **after** `UseRouting` so feature checks run before the endpoint and streaming responses (SSE, file downloads) pass through untouched.
+
+### MVC filter alternative
+
+If you use `MapControllers`, register feature gating as an MVC authorization filter instead of middleware. It runs after the action is resolved, so it never buffers the response — safe for streaming/SSE endpoints no matter where it's placed:
+
+```C#
+builder.Services.AddAutoLicensing("Application 1", publicKey, licenseKey);
+builder.Services.AddControllers().AddLicenseFeatureGating();
+```
+
+Same `[HasFeature]` attribute and same 404 behavior. Don't register both — one gate is enough.
 
 ## Customize the obfuscation bytes
 

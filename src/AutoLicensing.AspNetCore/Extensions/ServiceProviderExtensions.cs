@@ -1,4 +1,5 @@
-﻿using AutoLicensing.AspNetCore.MiddleWares;
+﻿using AutoLicensing.AspNetCore.Filters;
+using AutoLicensing.AspNetCore.Middlewares;
 using AutoLicensing.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,19 @@ public static class ServiceProviderExtensions
 
     public static void UseAutoLicensing(this IApplicationBuilder app)
     {
-        app.UseMiddleware<AutoLicensingMiddleWare>();
+        app.UseMiddleware<AutoLicensingMiddleware>();
+    }
+
+    /// <summary>
+    /// Registers license-feature gating ([HasFeature]) as an MVC authorization filter
+    /// instead of middleware. Runs only after the endpoint/action is resolved, so it
+    /// never needs to buffer the response body — safe for streaming/SSE endpoints
+    /// regardless of where it's called relative to UseRouting in Program.cs.
+    /// </summary>
+    public static IMvcBuilder AddLicenseFeatureGating(this IMvcBuilder builder)
+    {
+        builder.AddMvcOptions(options => { options.Filters.Add<LicenseFeatureAuthorizationFilter>(); });
+
+        return builder;
     }
 }
