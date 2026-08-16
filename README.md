@@ -132,14 +132,26 @@ Confuser.ConfusingBytes = "Some random bytes"u8.ToArray();
 
 ## Publishing to NuGet
 
-Create and push all three packages with one script:
+### CI (recommended) — trusted publishing
+
+Pushing a version tag triggers `.github/workflows/nuget-publish.yml`, which builds, packs, and pushes all three packages to nuget.org via [trusted publishing](https://learn.microsoft.com/en-us/nuget/nuget-org/trusted-publishing) — no API key secrets.
 
 ```powershell
-.\scripts\publish.ps1 -ApiKey <your-api-key>
-# or set the key once: $env:NUGET_API_KEY = "<your-api-key>"
+git tag v2.3.0
+git push origin v2.3.0
 ```
 
-Get an API key at https://www.nuget.org/account/apikeys. Push is permanent — the same version of a package ID can't be re-uploaded.
+### Locally
+
+Push with a NuGet login stored in `NuGet.Config` (`dotnet nuget login https://api.nuget.org/v3/index.json`), or bump + build + push in one shot:
+
+```powershell
+.\scripts\publish.ps1 -Version 2.3.0   # bump version, build, pack, push
+# or push already-built packages only:
+.\scripts\publish.ps1
+```
+
+Push is permanent — the same version of a package ID can't be re-uploaded.
 
 ## License
 
