@@ -21,14 +21,11 @@ if ([string]::IsNullOrWhiteSpace($ApiKey)) {
     throw "No API key. Set env var NUGET_API_KEY or pass -ApiKey."
 }
 
-# 1. Build + pack all packages (GeneratePackageOnBuild is already on)
-dotnet pack (Join-Path $root "AutoLicensing.slnx") -c Release -o $out --nologo
-if ($LASTEXITCODE -ne 0) { throw "dotnet pack failed." }
+# 1. Build + pack the library packages
+& (Join-Path $PSScriptRoot "build.ps1")
+if ($LASTEXITCODE -ne 0) { throw "Pack failed." }
 
-# 2. Remove the app package — only the three libraries are published
-Remove-Item (Join-Path $out "AutoLicensing.Console.*.nupkg") -ErrorAction SilentlyContinue
-
-# 3. Push the library packages
+# 2. Push the library packages
 $packages = @(
     "AutoLicensing.*.nupkg",
     "AutoLicensing.Generator.*.nupkg",
@@ -45,3 +42,6 @@ foreach ($pattern in $packages) {
 }
 
 Write-Host "All packages pushed." -ForegroundColor Green
+
+
+PAUSE
