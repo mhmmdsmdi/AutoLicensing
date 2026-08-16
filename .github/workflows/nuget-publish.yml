@@ -1,0 +1,38 @@
+name: publish-to-nuget
+
+on:
+  push:
+    tags:
+      - '**'
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Pack packages
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          dotnet pack AutoLicensing.slnx -c Release -o packages -p:Version="$VERSION" --nologo
+          # Exclude the Console app package; only the three libraries are published
+          rm -f packages/AutoLicensing.Console.*.nupkg
+
+      - name: Push to NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          for pkg in packages/*.nupkg; do
+            dotnet nuget push "$pkg" \
+              --api-key "$NUGET_API_KEY" \
+              --source https://api.nuget.org/v3/index.json \
+              --skip-duplicate
+          done
