@@ -119,6 +119,17 @@ Signature obfuscation must match between signer and verifier. Change the default
 Confuser.ConfusingBytes = "Some random bytes"u8.ToArray();
 ```
 
+## Publishing to NuGet
+
+Create and push all three packages with one script:
+
+```powershell
+.\scripts\publish.ps1 -ApiKey <your-api-key>
+# or set the key once: $env:NUGET_API_KEY = "<your-api-key>"
+```
+
+Get an API key at https://www.nuget.org/account/apikeys. Push is permanent — the same version of a package ID can't be re-uploaded.
+
 ## License
 
 MIT
