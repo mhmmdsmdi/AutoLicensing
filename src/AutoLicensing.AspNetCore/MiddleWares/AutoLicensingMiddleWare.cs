@@ -1,52 +1,59 @@
-﻿using System.Net;
+using System.Net;
 using AutoLicensing.AspNetCore.Attributes;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
 
 namespace AutoLicensing.AspNetCore.MiddleWares;
 
-public class AutoLicensingMiddleWare
+public class AutoLicensingMiddleWare(RequestDelegate next)
 {
-    private readonly RequestDelegate _next;
-
-    public AutoLicensingMiddleWare(RequestDelegate next)
-    {
-        _next = next;
-    }
-
     public async Task Invoke(HttpContext context, ILicenseProvider licenseProvider)
     {
         var response = context.Response;
+
+        // Endpoint already resolved (middleware registered after UseRouting):
+        // gate before the endpoint runs so streaming/SSE responses pass through un-buffered.
+        var endpoint = context.GetEndpoint();
+        if (endpoint != null)
+        {
+            var attribute = endpoint.Metadata.GetMetadata<HasFeatureAttribute>();
+            if (attribute != null && !licenseProvider.IsFeatureEnabled(attribute.FeatureName))
+            {
+                response.StatusCode = (int)HttpStatusCode.NotFound;
+                await response.WriteAsync("Not found");
+                return;
+            }
+
+            await next(context);
+            return;
+        }
+
+        // Endpoint not resolved yet (middleware registered before UseRouting):
+        // buffer the response so the body can be replaced after the endpoint runs.
+        // ponytail: SSE/streaming endpoints stay buffered in this placement — register after UseRouting to stream.
         var originBody = response.Body;
         using var newBody = new MemoryStream();
         response.Body = newBody;
 
-        await _next(context);
-
-        await _next.Invoke(context);
-
-        var endpoint = context.Features.Get<IEndpointFeature>()?.Endpoint;
-        var attribute = endpoint?.Metadata.GetMetadata<HasFeatureAttribute>();
-        if (attribute != null)
+        try
         {
-            if (!licenseProvider.IsFeatureEnabled(attribute.FeatureName))
+            await next(context);
+
+            endpoint = context.GetEndpoint();
+            var attribute = endpoint?.Metadata.GetMetadata<HasFeatureAttribute>();
+            if (attribute != null && !licenseProvider.IsFeatureEnabled(attribute.FeatureName))
             {
-                var stream = response.Body;
                 response.StatusCode = (int)HttpStatusCode.NotFound;
-                using var reader = new StreamReader(stream, leaveOpen: true);
-                var originalResponse = await reader.ReadToEndAsync();
-                var modifiedResponse = "Not found";
-
-                stream.SetLength(0);
-                await using var writer = new StreamWriter(stream, leaveOpen: true);
-                await writer.WriteAsync(modifiedResponse);
-                await writer.FlushAsync();
-                response.ContentLength = stream.Length;
+                newBody.SetLength(0);
+                await response.WriteAsync("Not found");
+                response.ContentLength = newBody.Length;
             }
-        }
 
-        newBody.Seek(0, SeekOrigin.Begin);
-        await newBody.CopyToAsync(originBody);
-        response.Body = originBody;
+            newBody.Seek(0, SeekOrigin.Begin);
+            await newBody.CopyToAsync(originBody);
+        }
+        finally
+        {
+            response.Body = originBody;
+        }
     }
 }

@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/test/">
+    <Project Path="test/AutoLicensing.Test/AutoLicensing.Test.csproj" />
+  </Folder>
+  <Project Path="src/AutoLicensing.AspNetCore/AutoLicensing.AspNetCore.csproj" />
+  <Project Path="src/AutoLicensing.Console/AutoLicensing.Console.csproj" />
+  <Project Path="src/AutoLicensing.Generator/AutoLicensing.Generator.csproj" />
+  <Project Path="src/AutoLicensing/AutoLicensing.csproj" />
+</Solution>
